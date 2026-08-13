@@ -1,0 +1,5 @@
+customer_id,name,age,city
+101,Alice,25.0,New York
+102,Bob,35.0,Los Angeles
+103,Charlie,,Chicago
+104,Diana,40.0,
