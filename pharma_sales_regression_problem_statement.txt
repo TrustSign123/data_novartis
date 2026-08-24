@@ -1,0 +1,118 @@
+PHARMACEUTICAL SALES PREDICTION — LINEAR REGRESSION LAB
+
+Client Context
+--------------
+You are working as a data scientist for a pharmaceutical organization. The commercial
+team wants to understand which business factors are associated with monthly product
+sales and build a simple regression model that can predict expected monthly sales.
+
+Objective
+---------
+Build a machine learning regression model using Python and scikit-learn to predict:
+
+    TARGET: monthly_sales_usd
+
+Use the supplied CSV file: pharma_sales_regression_dataset.csv
+
+Dataset
+-------
+The dataset contains 650 synthetic-but-realistic pharmaceutical commercial records.
+It is designed for training purposes and does not represent real Novartis data or
+confidential commercial information.
+
+Important columns
+-----------------
+record_id                  Unique record identifier
+region                     Geographic business region
+product                    Pharmaceutical product category
+sales_channel              Commercial channel
+quarter                    Business quarter
+sales_rep_count            Number of sales representatives
+marketing_spend_usd        Marketing expenditure in USD
+doctor_visits              Number of HCP/doctor visits
+samples_distributed        Number of product samples distributed
+prior_month_sales_usd      Previous month's sales
+competitor_index           Relative competitive pressure index
+stock_availability         Product availability ratio
+discount_pct               Average discount percentage
+market_potential_index     Relative market opportunity index
+monthly_sales_usd           TARGET: monthly sales to predict
+
+Business Question
+-----------------
+Can we predict monthly pharmaceutical product sales from commercial and market
+variables such as marketing investment, doctor visits, samples distributed,
+previous-month sales, competition, stock availability, discounts, and market
+potential?
+
+Tasks
+-----
+1. Load the CSV using pandas.
+2. Inspect shape, columns, data types, missing values, and summary statistics.
+3. Perform basic exploratory data analysis.
+4. Identify the target variable and potential predictor variables.
+5. Separate features (X) and target (y).
+6. Decide how to handle categorical variables:
+   - region
+   - product
+   - sales_channel
+   - quarter
+7. Convert categorical variables into model-ready numerical features using an
+   appropriate encoding approach such as OneHotEncoder.
+8. Split the data into training and testing sets.
+9. Train a LinearRegression model from scikit-learn.
+10. Generate predictions for the test set.
+11. Evaluate the model using:
+      - MAE
+      - MSE
+      - RMSE
+      - R²
+12. Compare actual sales versus predicted sales.
+13. Plot a suitable regression evaluation visualization.
+14. Interpret selected model coefficients and explain which variables have positive
+    or negative relationships with predicted sales.
+15. Create predictions for a new hypothetical pharmaceutical commercial scenario.
+
+Suggested Beginner Workflow
+----------------------------
+Pandas
+  -> Data inspection
+  -> EDA
+  -> Feature/target separation
+  -> Train/test split
+  -> Preprocessing / encoding
+  -> Linear Regression
+  -> Prediction
+  -> Evaluation
+  -> Business interpretation
+
+Expected Learning Outcomes
+---------------------------
+By completing this exercise, the learner should be able to:
+
+- Understand a business regression problem.
+- Distinguish regression from classification.
+- Prepare structured business data for ML.
+- Encode categorical variables.
+- Train LinearRegression using scikit-learn.
+- Understand coefficients and predictions.
+- Calculate and interpret MAE, MSE, RMSE, and R².
+- Explain model results in business language.
+
+Important Training Note
+-----------------------
+This is an educational synthetic dataset created to simulate pharmaceutical
+commercial-sales data. It is not actual company, patient, prescription, or
+confidential commercial data.
+
+Extension Challenges
+--------------------
+A. Train a model using only numerical variables and compare performance.
+B. Train a model with categorical variables encoded.
+C. Remove prior_month_sales_usd and compare R².
+D. Identify the three strongest numerical predictors.
+E. Create a residual plot.
+F. Compare LinearRegression with Ridge and Lasso.
+G. Build a reusable prediction function that accepts a new business scenario.
+H. Explain whether the model should be used for forecasting, planning, or
+   decision support and identify its limitations.
