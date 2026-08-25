@@ -1,0 +1,370 @@
+NOVARTIS STUDENT LAB
+TIME-SERIES FORECASTING WITH ARIMA
+==================================
+
+IMPORTANT DATA NOTE
+-------------------
+This dataset is SYNTHETIC and created for educational/training purposes.
+It is not Novartis proprietary data, does not represent actual Novartis
+products, patients, sales, markets, or commercial performance, and must not
+be interpreted as real pharmaceutical business data.
+
+1. BUSINESS CONTEXT
+-------------------
+A pharmaceutical commercial analytics team wants to improve its ability to
+forecast daily product demand. Accurate demand forecasting can support
+inventory planning, supply-chain decisions, commercial planning, and
+resource allocation.
+
+You have been provided with 600 days of synthetic pharmaceutical sales data.
+Your task is to investigate the historical time series and build an ARIMA-based
+forecasting solution for future daily sales.
+
+The key business question is:
+
+    "Based on historical daily sales behavior, what sales volume should the
+     business expect over the next forecasting period?"
+
+2. DATASET
+----------
+File:
+    novartis_time_series_pharma_sales_600_rows.csv
+
+Number of observations:
+    600 daily observations
+
+Date range:
+    2019-01-01 through 2020-08-22
+
+Columns:
+    Date
+        Observation date.
+
+    Product
+        Synthetic product identifier. Included to resemble a commercial
+        product dataset.
+
+    Region
+        Synthetic business region: North, South, East, or West.
+
+    Sales_Units
+        Daily number of product units sold. THIS IS THE PRIMARY TARGET
+        VARIABLE FOR FORECASTING.
+
+    Price_USD
+        Synthetic average selling price per unit in USD.
+
+    Marketing_Spend_USD
+        Synthetic daily marketing spend in USD.
+
+    Promotion
+        Binary indicator:
+            0 = no promotion
+            1 = promotion active
+
+    Inventory_Units
+        Synthetic available inventory.
+
+    Day_of_Week
+        Name of the day corresponding to Date.
+
+3. YOUR OBJECTIVE
+-----------------
+Build a time-series forecasting model that predicts future Sales_Units.
+
+You should use ARIMA as the main forecasting method.
+
+Do NOT randomly shuffle the time-series observations.
+
+Your solution should demonstrate that you understand:
+
+    - time-series structure
+    - trend
+    - seasonality
+    - stationarity
+    - differencing
+    - ARIMA(p,d,q)
+    - temporal train/test splitting
+    - forecasting
+    - forecast evaluation
+    - residual analysis
+
+4. EXPECTED ANALYSIS
+--------------------
+
+STEP 1 — Load the data
+    - Import pandas.
+    - Read the CSV.
+    - Inspect shape, columns, data types, and missing values.
+    - Convert Date to datetime.
+    - Sort the data by Date.
+    - Set Date as the time-series index.
+
+STEP 2 — Exploratory analysis
+    - Plot Sales_Units against Date.
+    - Describe the overall trend.
+    - Investigate whether sales show weekly patterns.
+    - Check whether promotions appear associated with higher sales.
+    - Inspect the distribution of Sales_Units.
+    - Calculate basic descriptive statistics.
+
+STEP 3 — Understand time-series components
+    Discuss whether the series appears to contain:
+        - level
+        - trend
+        - seasonality
+        - noise
+
+    Explain your observations from the plot rather than simply stating
+    definitions.
+
+STEP 4 — Check stationarity
+    Use an appropriate statistical test such as the Augmented Dickey-Fuller
+    (ADF) test.
+
+    Answer:
+        - Is the original Sales_Units series stationary?
+        - What does the test statistic mean?
+        - What does the p-value indicate?
+        - Is differencing required?
+
+STEP 5 — Differencing
+    If appropriate, apply first-order differencing.
+
+    Compare:
+        Original series
+        vs.
+        Differenced series
+
+    Explain why differencing can help ARIMA model a non-stationary series.
+
+STEP 6 — Understand ACF and PACF
+    Generate ACF and PACF plots.
+
+    Use them as diagnostic tools to develop candidate values for:
+        p
+        d
+        q
+
+    Do not blindly select parameters only from the plots. Explain that
+    model selection should also consider validation performance and
+    diagnostics.
+
+STEP 7 — Build ARIMA models
+    Build several candidate ARIMA models, for example:
+
+        ARIMA(1,1,0)
+        ARIMA(1,1,1)
+        ARIMA(2,1,0)
+        ARIMA(2,1,1)
+        ARIMA(3,1,1)
+
+    You may test additional reasonable combinations.
+
+STEP 8 — Temporal train/test split
+    Use an order-preserving split.
+
+    Suggested approach:
+        Training set = first 80% of observations
+        Test set     = final 20% of observations
+
+    IMPORTANT:
+        Never use random train_test_split(shuffle=True) for this task.
+
+STEP 9 — Forecast the test period
+    Fit the ARIMA model using the training data only.
+
+    Forecast exactly the length of the test set.
+
+    Compare:
+        Actual Sales_Units
+        vs.
+        Forecast Sales_Units
+
+STEP 10 — Evaluate performance
+    Calculate at least:
+
+        MAE
+        RMSE
+
+    Optionally calculate:
+        MAPE
+
+    Explain what each metric means in business terms.
+
+    Example interpretation:
+        "The model's MAE of X means that the forecast was off by
+         approximately X units per day on average."
+
+STEP 11 — Compare models
+    Create a comparison table containing:
+
+        Model
+        MAE
+        RMSE
+        Optional MAPE
+
+    Select the best model based on validation performance, while also
+    considering model simplicity and diagnostic quality.
+
+STEP 12 — Residual diagnostics
+    Analyze the residuals:
+
+        Residual = Actual - Forecast
+
+    Check whether residuals:
+        - have a mean close to zero
+        - show remaining autocorrelation
+        - show obvious patterns
+        - contain unusually large errors
+
+    Explain why a good forecasting model should leave mostly unpredictable
+    residuals.
+
+STEP 13 — Final forecasting model
+    After selecting a suitable ARIMA specification, refit the chosen model
+    using all available historical observations.
+
+    Forecast the next 30 days.
+
+    Produce:
+        Date
+        Forecast_Sales_Units
+
+STEP 14 — Visualization
+    Create a final chart showing:
+
+        Historical Sales
+        Test-period Forecast
+        Future 30-day Forecast
+
+    Clearly label the actual and forecast portions.
+
+5. BUSINESS INTERPRETATION
+--------------------------
+Answer the following questions in your final notebook:
+
+    1. What is the overall sales trend?
+
+    2. Is there evidence of recurring seasonality?
+
+    3. Was differencing necessary? Why?
+
+    4. Which ARIMA(p,d,q) model performed best?
+
+    5. What were the MAE and RMSE?
+
+    6. How would you explain the model's accuracy to a non-technical
+       commercial or supply-chain stakeholder?
+
+    7. What are the limitations of forecasting daily pharmaceutical sales
+       using only historical sales?
+
+    8. Which external variables in the dataset could potentially explain
+       sales changes that pure ARIMA cannot directly capture?
+
+6. IMPORTANT CONCEPT — ARIMA LIMITATION
+---------------------------------------
+Standard ARIMA primarily models the target series' own temporal behavior.
+
+The dataset contains additional variables such as:
+    - Price_USD
+    - Marketing_Spend_USD
+    - Promotion
+    - Inventory_Units
+    - Region
+
+Do not automatically put all of these variables into standard ARIMA.
+
+Discuss why a model such as ARIMAX/SARIMAX or a feature-based machine-learning
+model could be considered when external predictors are important.
+
+7. ADVANCED CHALLENGE
+---------------------
+After completing the basic ARIMA solution, try the following:
+
+    Challenge A:
+        Compare ARIMA with a naive forecasting baseline.
+
+    Challenge B:
+        Investigate whether weekly seasonality exists and explain why
+        SARIMA may be more appropriate if strong seasonality is present.
+
+    Challenge C:
+        Build a SARIMA model and compare it with ARIMA.
+
+    Challenge D:
+        Create lag and rolling-window features and train a machine-learning
+        regression model such as Random Forest or Gradient Boosting.
+
+    Challenge E:
+        Compare:
+            Naive
+            ARIMA
+            SARIMA
+            Machine Learning
+
+        using the same time-based test period.
+
+8. DELIVERABLE
+--------------
+Submit one Jupyter Notebook containing:
+
+    1. Problem understanding
+    2. Data loading
+    3. Data cleaning
+    4. Exploratory analysis
+    5. Time-series visualization
+    6. Stationarity analysis
+    7. Differencing
+    8. ACF/PACF analysis
+    9. ARIMA model development
+   10. Temporal train/test split
+   11. Forecasting
+   12. MAE/RMSE evaluation
+   13. Model comparison
+   14. Residual diagnostics
+   15. 30-day future forecast
+   16. Business interpretation
+   17. Limitations
+   18. Advanced recommendations
+
+9. LEARNING OUTCOME
+-------------------
+By completing this project, students should be able to explain and implement
+the complete basic forecasting lifecycle:
+
+    Historical Data
+          ↓
+    Time-Series EDA
+          ↓
+    Stationarity
+          ↓
+    Differencing
+          ↓
+    ACF / PACF
+          ↓
+    ARIMA(p,d,q)
+          ↓
+    Temporal Validation
+          ↓
+    Forecast
+          ↓
+    MAE / RMSE
+          ↓
+    Residual Diagnostics
+          ↓
+    Business Decision
+
+10. ETHICAL AND BUSINESS NOTE
+-----------------------------
+This exercise is strictly educational. Pharmaceutical forecasting in real
+organizations requires additional considerations such as data governance,
+data quality, market access, supply constraints, product lifecycle,
+regulatory requirements, demand drivers, promotional policy, and appropriate
+business validation.
+
+Do not use this synthetic dataset or the resulting model to make real
+clinical, patient, regulatory, prescribing, supply, or commercial decisions.
+
+END OF PROBLEM STATEMENT
